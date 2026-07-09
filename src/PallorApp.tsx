@@ -135,6 +135,7 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
       {stage === "history" && currentCase && (
         <ChatSimulation
           messages={messages}
+          patientSummary={`เด็ก${currentCase.patientIdentity.childSex === "ชาย" ? "ชาย" : "หญิง"} อายุ ${currentCase.patientIdentity.childAge}`}
           question={question}
           setQuestion={setQuestion}
           onSubmit={submitQuestion}

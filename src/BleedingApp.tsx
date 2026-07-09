@@ -209,6 +209,7 @@ export function BleedingApp({ onSwitchToPallor }: { onSwitchToPallor: () => void
       {stage === "history" && currentCase && (
         <BleedingChatSimulation
           messages={messages}
+          patientSummary={`เด็ก${currentCase.identity.childSex === "ชาย" ? "ชาย" : "หญิง"} อายุ ${currentCase.identity.childAge}`}
           question={question}
           setQuestion={setQuestion}
           onSubmit={submitQuestion}

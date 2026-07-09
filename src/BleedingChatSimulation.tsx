@@ -4,6 +4,7 @@ import type { Message } from "./types";
 
 type Props = {
   messages: Message[];
+  patientSummary: string;
   question: string;
   setQuestion: (value: string) => void;
   onSubmit: (event: FormEvent) => void;
@@ -12,6 +13,7 @@ type Props = {
 
 export function BleedingChatSimulation({
   messages,
+  patientSummary,
   question,
   setQuestion,
   onSubmit,
@@ -32,7 +34,7 @@ export function BleedingChatSimulation({
         <dl>
           <div>
             <dt>ผู้ป่วย</dt>
-            <dd>เด็กหนึ่งราย กรุณาถามข้อมูลระบุตัวตนจากผู้ให้ประวัติ</dd>
+            <dd>{patientSummary} กรุณาถามชื่อและข้อมูลระบุตัวตนจากผู้ให้ประวัติ</dd>
           </div>
           <div>
             <dt>ผู้ให้ประวัติ</dt>

@@ -4,13 +4,21 @@ import type { Message } from "./types";
 
 type ChatSimulationProps = {
   messages: Message[];
+  patientSummary: string;
   question: string;
   setQuestion: (value: string) => void;
   onSubmit: (event: FormEvent) => void;
   onEnd: () => void;
 };
 
-export function ChatSimulation({ messages, question, setQuestion, onSubmit, onEnd }: ChatSimulationProps) {
+export function ChatSimulation({
+  messages,
+  patientSummary,
+  question,
+  setQuestion,
+  onSubmit,
+  onEnd,
+}: ChatSimulationProps) {
   return (
     <section className="history-layout">
       <aside className="case-sidebar">
@@ -18,7 +26,7 @@ export function ChatSimulation({ messages, question, setQuestion, onSubmit, onEn
         <dl>
           <div>
             <dt>ผู้ป่วย</dt>
-            <dd>เด็กหนึ่งราย ข้อมูลระบุตัวตนต้องถามจากมารดา</dd>
+            <dd>{patientSummary} กรุณาถามชื่อและข้อมูลระบุตัวตนจากมารดา</dd>
           </div>
           <div>
             <dt>ผู้ให้ประวัติ</dt>

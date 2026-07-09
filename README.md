@@ -1,26 +1,23 @@
-# แพลตฟอร์มฝึกซักประวัติเด็กซีดสำหรับนักศึกษาแพทย์ปี 4
+# แพลตฟอร์มจำลองกุมารโลหิตวิทยาสำหรับนักศึกษาแพทย์ปี 4
 
-Pediatric Pallor Clinical Simulation Platform
+Pediatric Hematology Clinical Simulation Platform
 
-เว็บแอปภาษาไทยสำหรับให้นักศึกษาแพทย์ปี 4 ฝึกซักประวัติผู้ป่วยเด็กที่มาด้วยอาการซีด โดยจำลองการซักประวัติจากมารดาของผู้ป่วย ใช้ rule-based Thai keyword matching และไม่ใช้ backend หรือ external AI API
+เว็บแอปภาษาไทยสำหรับให้นักศึกษาแพทย์ปี 4 ฝึกประเมินผู้ป่วยเด็กแบบ self-directed learning ใช้ rule-based Thai keyword matching, local state และไม่ใช้ backend หรือ external AI API
 
-## ความสามารถหลัก
+## โมดูลภาวะเลือดออกผิดปกติ
 
-- สุ่มเคสจาก case bank 4 เคส
+- สุ่มเคส ITP, Hemophilia A, von Willebrand disease และ APDE
 - ฝึกทักทาย แนะนำตัว ขออนุญาต และยืนยันตัวผู้ป่วย/ผู้ให้ประวัติ
-- ฝึกซักประวัติเด็กซีดผ่าน chat simulation
-- แสดงผลตรวจร่างกายหลังจบการซักประวัติ
-- ให้ผู้เรียนเขียน problem list
-- ประเมินคะแนนอัตโนมัติรวม 100 คะแนน
-- ให้ feedback ด้าน clinical history taking และ communication skills
-- เฉลย diagnosis หลังส่ง problem list เท่านั้น
+- ฝึกซักประวัติและแยก mucocutaneous bleeding จาก deep/joint bleeding
+- เลือกหัวข้อการตรวจร่างกายก่อนเปิดผลตรวจ
+- เลือก laboratory investigations จากรายการตรวจเบื้องต้นและการตรวจจำเพาะ
+- เขียน problem list, differential diagnosis และ final impression
+- รับคะแนนและ feedback 5 ด้านรวม 100 คะแนน
+- เปิด diagnosis, expected laboratory pattern และ model answer หลังส่งคำตอบ
 
-## เคสที่มีในระบบ
+## โมดูลภาวะซีด
 
-- Iron deficiency anemia
-- Thalassemia disease
-- Acute leukemia presenting with anemia
-- Acute hemolytic anemia, suspected G6PD deficiency
+โมดูลเดิมยังใช้งานได้ครบ 4 เคส ได้แก่ iron deficiency anemia, thalassemia, acute leukemia และ acute hemolysis จาก G6PD deficiency
 
 ## การรันในเครื่อง
 

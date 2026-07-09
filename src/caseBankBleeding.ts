@@ -61,6 +61,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกมีจุดเลือดออกกับจ้ำเลือดตามตัวค่ะ",
     broadAnswer: "เห็นเป็นจุดแดงเล็ก ๆ กับจ้ำตามแขนขามาประมาณ 3 วันค่ะ",
     responseRules: [
+      {
+        id: "vaccination",
+        domainIds: ["infection"],
+        keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "mmr", "เชื้อเป็น", "live vaccine"],
+        answer: "วัคซีนพื้นฐานครบตามวัยค่ะ ล่าสุดเพิ่งฉีด MMR เข็มเก็บตกเมื่อประมาณ 3 สัปดาห์ก่อน เพราะในสมุดวัคซีนขาดเข็มที่สองค่ะ",
+      },
       { id: "duration", domainIds: ["onset"], keywords: ["เริ่ม", "นาน", "กี่วัน", "กี่สัปดาห์", "กี่เดือน", "เมื่อไหร่"], answer: "เป็นมาประมาณ 3 วันค่ะ" },
       { id: "epistaxis", domainIds: ["site", "mucocutaneous"], keywords: ["กำเดา", "จมูก"], answer: "มีเลือดกำเดาออกเล็กน้อยครั้งหนึ่งค่ะ แล้วหยุดเอง" },
       { id: "gum", domainIds: ["mucocutaneous"], keywords: ["ไรฟัน", "เหงือก"], answer: "ไม่มีเลือดออกตามไรฟันรุนแรงค่ะ" },
@@ -99,7 +105,7 @@ export const bleedingCases: BleedingCase[] = [
     },
     problemScoring: {
       patternKeywords: ["mucocutaneous", "เยื่อบุ", "ผิวหนัง", "platelet", "เกล็ดเลือด", "petechiae", "จุดเลือด"],
-      positiveKeywords: ["3 วัน", "สามวัน", "จุดเลือด", "จ้ำเลือด", "กำเดา", "หวัด", "ติดเชื้อ"],
+      positiveKeywords: ["3 วัน", "สามวัน", "จุดเลือด", "จ้ำเลือด", "กำเดา", "หวัด", "ติดเชื้อ", "วัคซีน", "mmr", "3 สัปดาห์"],
       negativeKeywords: ["ไม่มีข้อ", "ไม่มีกล้ามเนื้อ", "ไม่มีไข้", "ไม่มีน้ำหนัก", "ไม่มีปวดกระดูก", "ตับม้ามไม่โต", "ไม่มีต่อมน้ำเหลือง"],
       differentialKeywords: ["itp", "immune thrombocytopenia", "leukemia", "aplastic", "platelet disorder", "เกล็ดเลือดต่ำ"],
       impressionKeywords: ["itp", "immune thrombocytopenia", "เกล็ดเลือดต่ำจากภูมิคุ้มกัน"],
@@ -108,6 +114,7 @@ export const bleedingCases: BleedingCase[] = [
       "เด็กหญิงอายุ 4 ปี มี acute mucocutaneous bleeding ได้แก่ petechiae และ ecchymoses 3 วัน",
       "มีเลือดกำเดาเล็กน้อย แต่ไม่มี major bleeding",
       "มีประวัติติดเชื้อทางเดินหายใจก่อนหน้า 1–2 สัปดาห์",
+      "ได้รับวัคซีน MMR เข็มเก็บตกเมื่อประมาณ 3 สัปดาห์ก่อน ซึ่งเป็น live attenuated vaccine และอาจเป็น trigger ของ ITP ได้แม้พบไม่บ่อย",
       "ไม่มีข้อบวม กล้ามเนื้อบวม หรือเลือดออกลึก ทำให้ coagulation factor deficiency เด่นชัดน้อยลง",
       "ไม่มีไข้ปัจจุบัน น้ำหนักลด ปวดกระดูก ต่อมน้ำเหลืองโต หรือตับม้ามโต จึงไม่มี red flags ของ leukemia ชัดเจน",
       "ภาพรวมเข้าได้กับ thrombocytopenic bleeding โดยคิดถึง acute ITP",
@@ -115,7 +122,7 @@ export const bleedingCases: BleedingCase[] = [
     differentialDiagnosis: ["Acute ITP", "Acute leukemia", "Aplastic anemia", "Platelet function disorder"],
     finalImpression: "สงสัย acute immune thrombocytopenia (ITP) หลังการติดเชื้อไวรัส",
     suggestedInvestigations: ["CBC พร้อมจำนวนเกล็ดเลือด", "Peripheral blood smear", "PT และ aPTT เมื่อ bleeding pattern ไม่ชัดหรือก่อนหัตถการ", "พิจารณาตรวจไวรัสเฉพาะเมื่อมีข้อบ่งชี้", "Bone marrow examination เฉพาะเมื่อมี atypical features หรือสงสัย malignancy"],
-    teachingSummary: "ITP มักมาด้วย mucocutaneous bleeding เช่น petechiae, ecchymoses และ epistaxis เด็กมักดูสบายดี ไม่มีตับม้ามโตหรือต่อมน้ำเหลืองโต และ CBC มักพบ isolated thrombocytopenia",
+    teachingSummary: "ITP มักมาด้วย mucocutaneous bleeding เช่น petechiae, ecchymoses และ epistaxis เด็กมักดูสบายดี ไม่มีตับม้ามโตหรือต่อมน้ำเหลืองโต และ CBC มักพบ isolated thrombocytopenia ควรถามทั้งการติดเชื้อและวัคซีนก่อนหน้า โดย MMR ซึ่งเป็น live attenuated vaccine อาจสัมพันธ์กับ ITP ได้แต่พบไม่บ่อย",
   },
   {
     id: "hemophilia-a",
@@ -134,6 +141,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกเข่าบวมและปวดมากหลังล้มค่ะ",
     broadAnswer: "เข่าขวาบวมและปวดหลังล้มตอนเล่นตั้งแต่เมื่อวานค่ะ",
     responseRules: [
+      {
+        id: "vaccination",
+        domainIds: ["trauma"],
+        keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "laje", "เจอี", "เชื้อเป็น", "live vaccine"],
+        answer: "วัคซีนพื้นฐานครบตามวัยค่ะ ล่าสุดฉีดวัคซีนไข้สมองอักเสบเจอีชนิดเชื้อเป็นอ่อนฤทธิ์เข็มที่ 2 ตอนอายุ 2 ปีครึ่ง ประมาณ 6 เดือนก่อนค่ะ ตอนฉีดมีรอยช้ำและบวมกว่าปกติบริเวณที่ฉีดค่ะ",
+      },
       { id: "duration", domainIds: ["onset"], keywords: ["เริ่ม", "นาน", "กี่วัน", "กี่สัปดาห์", "เมื่อไหร่"], answer: "เข่าบวมและปวดมาตั้งแต่เมื่อวานค่ะ" },
       { id: "trauma", domainIds: ["trauma"], keywords: ["ล้ม", "กระแทก", "อุบัติเหตุ", "เล่น", "กิจกรรม"], answer: "ก่อนหน้าเขาล้มตอนเล่นค่ะ ไม่ได้กระแทกแรงมาก แต่เข่าบวมมากเลยค่ะ" },
       { id: "deep", domainIds: ["site", "deep"], keywords: ["ข้อบวม", "ปวดข้อ", "เข่าบวม", "ข้อเท้า", "เลือดออกในข้อ", "กล้ามเนื้อ", "ช้ำลึก", "ลงน้ำหนัก"], answer: "เข่าขวาบวม ปวด และลงน้ำหนักไม่ค่อยได้ค่ะ" },
@@ -208,6 +221,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกมีเลือดกำเดาออกบ่อย และประจำเดือนมามากค่ะ",
     broadAnswer: "ช่วงนี้เลือดกำเดาออกบ่อยและประจำเดือนก็มามากค่ะ",
     responseRules: [
+      {
+        id: "vaccination",
+        domainIds: [],
+        keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "dt", "บาดทะยัก", "hpv", "เชื้อเป็น", "live vaccine"],
+        answer: "วัคซีนตามวัยครบค่ะ ล่าสุดฉีดวัคซีนคอตีบ-บาดทะยัก หรือ dT ที่โรงเรียนตอน ป.6 ประมาณ 1 ปีก่อนค่ะ หลังฉีดไม่มีเลือดออกหรือก้อนบวมผิดปกติ",
+      },
       { id: "epistaxis", domainIds: ["site", "mucocutaneous"], keywords: ["กำเดา", "จมูก"], answer: "เลือดกำเดาออกเดือนละหลายครั้ง และบางครั้งนานกว่าจะหยุดค่ะ" },
       { id: "gum", domainIds: ["mucocutaneous"], keywords: ["ไรฟัน", "เหงือก", "แปรงฟัน"], answer: "มีเลือดออกตามไรฟันบ้างเวลาแปรงฟันค่ะ" },
       { id: "menstruation", domainIds: ["site", "mucocutaneous"], keywords: ["ประจำเดือน", "ผ้าอนามัย", "กี่วัน", "รอบเดือน"], answer: "ประจำเดือนมามากค่ะ ใช้ผ้าอนามัยหลายแผ่นต่อวัน และมานานประมาณ 7–8 วันค่ะ" },
@@ -283,6 +302,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกมีจ้ำเลือดขึ้นง่ายตามตัวค่ะ",
     broadAnswer: "มีจ้ำตามแขนขาเป็น ๆ หาย ๆ และมีจุดแดงเล็ก ๆ บ้างค่ะ",
     responseRules: [
+      {
+        id: "vaccination",
+        domainIds: [],
+        keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "dtp", "opv", "โปลิโอ", "เชื้อเป็น", "live vaccine"],
+        answer: "วัคซีนพื้นฐานครบตามวัยค่ะ ล่าสุดเป็นวัคซีนรวมคอตีบ-บาดทะยัก-ไอกรนเข็มกระตุ้นกับวัคซีนโปลิโอชนิดรับประทาน ตอนอายุ 4 ปี ประมาณ 3 ปีก่อนค่ะ ตอนเข้า ป.1 โรงเรียนตรวจสมุดแล้วไม่ต้องฉีดเก็บตก",
+      },
       { id: "duration", domainIds: ["onset"], keywords: ["เริ่ม", "นาน", "กี่วัน", "กี่สัปดาห์", "กี่เดือน", "เมื่อไหร่"], answer: "เป็น ๆ หาย ๆ มาประมาณ 2 เดือนค่ะ" },
       { id: "pattern", domainIds: ["site", "mucocutaneous"], keywords: ["จ้ำเลือด", "จุดเลือด", "petechiae", "ecchymosis", "เลือดออกที่ไหน", "ลักษณะ", "ช้ำง่าย"], answer: "เป็นจ้ำเลือดตามแขนขา และมีจุดเลือดออกเล็ก ๆ บ้างค่ะ" },
       { id: "epistaxis", domainIds: ["site", "mucocutaneous"], keywords: ["กำเดา", "จมูก"], answer: "บางครั้งมีเลือดกำเดาเล็กน้อยค่ะ แต่หยุดเองได้" },

@@ -11,6 +11,22 @@ const standardScreeningNotes = {
   aptt: "ประเมิน intrinsic และ common coagulation pathway",
 } as const;
 
+const normalDietRule = {
+  id: "diet",
+  domainIds: [],
+  keywords: [
+    "รับประทานอาหาร",
+    "ทานอาหาร",
+    "กินอาหาร",
+    "กินข้าว",
+    "กินได้ไหม",
+    "อาหารเป็นอย่างไร",
+    "การกิน",
+    "โภชนาการ",
+  ],
+  answer: "รับประทานอาหารได้ปกติค่ะ",
+};
+
 const score = (
   id: string,
   label: string,
@@ -73,6 +89,7 @@ export const bleedingCases: BleedingCase[] = [
         keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "mmr", "เชื้อเป็น", "live vaccine"],
         answer: "วัคซีนพื้นฐานครบตามวัยค่ะ ล่าสุดเพิ่งฉีด MMR เข็มเก็บตกเมื่อประมาณ 3 สัปดาห์ก่อน เพราะในสมุดวัคซีนขาดเข็มที่สองค่ะ",
       },
+      normalDietRule,
       { id: "duration", domainIds: ["onset"], keywords: ["เริ่ม", "นาน", "กี่วัน", "กี่สัปดาห์", "กี่เดือน", "เมื่อไหร่"], answer: "เป็นมาประมาณ 3 วันค่ะ" },
       { id: "epistaxis", domainIds: ["site", "mucocutaneous"], keywords: ["กำเดา", "จมูก"], answer: "มีเลือดกำเดาออกเล็กน้อยครั้งหนึ่งค่ะ แล้วหยุดเอง" },
       { id: "gum", domainIds: ["mucocutaneous"], keywords: ["ไรฟัน", "เหงือก"], answer: "ไม่มีเลือดออกตามไรฟันรุนแรงค่ะ" },
@@ -159,6 +176,7 @@ export const bleedingCases: BleedingCase[] = [
         keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "laje", "เจอี", "เชื้อเป็น", "live vaccine"],
         answer: "วัคซีนพื้นฐานครบตามวัยค่ะ ล่าสุดฉีดวัคซีนไข้สมองอักเสบเจอีชนิดเชื้อเป็นอ่อนฤทธิ์เข็มที่ 2 ตอนอายุ 2 ปีครึ่ง ประมาณ 6 เดือนก่อนค่ะ ตอนฉีดมีรอยช้ำและบวมกว่าปกติบริเวณที่ฉีดค่ะ",
       },
+      normalDietRule,
       { id: "duration", domainIds: ["onset"], keywords: ["เริ่ม", "นาน", "กี่วัน", "กี่สัปดาห์", "เมื่อไหร่"], answer: "เข่าบวมและปวดมาตั้งแต่เมื่อวานค่ะ" },
       { id: "trauma", domainIds: ["trauma"], keywords: ["ล้ม", "กระแทก", "อุบัติเหตุ", "เล่น", "กิจกรรม"], answer: "ก่อนหน้าเขาล้มตอนเล่นค่ะ ไม่ได้กระแทกแรงมาก แต่เข่าบวมมากเลยค่ะ" },
       { id: "deep", domainIds: ["site", "deep"], keywords: ["ข้อบวม", "ปวดข้อ", "เข่าบวม", "ข้อเท้า", "เลือดออกในข้อ", "กล้ามเนื้อ", "ช้ำลึก", "ลงน้ำหนัก"], answer: "เข่าขวาบวม ปวด และลงน้ำหนักไม่ค่อยได้ค่ะ" },
@@ -245,6 +263,7 @@ export const bleedingCases: BleedingCase[] = [
         keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "dt", "บาดทะยัก", "hpv", "เชื้อเป็น", "live vaccine"],
         answer: "วัคซีนตามวัยครบค่ะ ล่าสุดฉีดวัคซีนคอตีบ-บาดทะยัก หรือ dT ที่โรงเรียนตอน ป.6 ประมาณ 1 ปีก่อนค่ะ หลังฉีดไม่มีเลือดออกหรือก้อนบวมผิดปกติ",
       },
+      normalDietRule,
       { id: "epistaxis", domainIds: ["site", "mucocutaneous"], keywords: ["กำเดา", "จมูก"], answer: "เลือดกำเดาออกเดือนละหลายครั้ง และบางครั้งนานกว่าจะหยุดค่ะ" },
       { id: "gum", domainIds: ["mucocutaneous"], keywords: ["ไรฟัน", "เหงือก", "แปรงฟัน"], answer: "มีเลือดออกตามไรฟันบ้างเวลาแปรงฟันค่ะ" },
       { id: "menstruation", domainIds: ["site", "mucocutaneous"], keywords: ["ประจำเดือน", "ผ้าอนามัย", "กี่วัน", "รอบเดือน"], answer: "ประจำเดือนมามากค่ะ ใช้ผ้าอนามัยหลายแผ่นต่อวัน และมานานประมาณ 7–8 วันค่ะ" },
@@ -342,6 +361,7 @@ export const bleedingCases: BleedingCase[] = [
       { id: "infection", domainIds: ["infection"], keywords: ["ไข้", "หวัด", "ไอ", "เจ็บคอ", "ท้องเสีย", "ติดเชื้อ", "ป่วยก่อน"], answer: "ไม่มีไข้หรืออาการติดเชื้อก่อนหน้านี้ค่ะ" },
       { id: "allergy", domainIds: [], keywords: ["แพ้", "ภูมิแพ้", "คัน", "ผื่น", "หอบ"], answer: "มีคันผิวหนังหรือเป็นผื่นภูมิแพ้บ้างค่ะ" },
       { id: "parasite", domainIds: [], keywords: ["พยาธิ", "เล่นดิน", "เท้าเปล่า", "สุก ๆ ดิบ ๆ", "สุกๆดิบๆ", "ปวดท้อง"], answer: "ชอบเล่นดิน เดินเท้าเปล่าบ้างค่ะ บางครั้งในบ้านก็กินอาหารสุก ๆ ดิบ ๆ" },
+      normalDietRule,
       { id: "medication", domainIds: ["medication"], keywords: ["ยา", "aspirin", "แอสไพริน", "nsaid", "ibuprofen", "สมุนไพร", "อาหารเสริม"], answer: "ไม่ได้กิน aspirin หรือยาแก้อักเสบค่ะ" },
       { id: "redflags", domainIds: ["redflags"], keywords: ["ซีด", "น้ำหนัก", "เบื่ออาหาร", "ปวดกระดูก", "ต่อมน้ำเหลือง", "ตับ", "ม้าม", "ท้องโต", "เหงื่อกลางคืน"], answer: "ไม่มีไข้ ไม่มีน้ำหนักลด ไม่มีปวดกระดูก ไม่เห็นต่อมน้ำเหลืองโตหรือท้องโตค่ะ" },
       { id: "family", domainIds: ["family"], keywords: ["ครอบครัว", "ญาติ", "น้า", "ลุง", "พี่น้อง", "hemophilia", "ฮีโมฟีเลีย", "von willebrand", "กรรมพันธุ์"], answer: "ไม่มีใครในครอบครัวเลือดออกง่ายค่ะ" },

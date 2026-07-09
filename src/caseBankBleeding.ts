@@ -62,6 +62,12 @@ export const bleedingCases: BleedingCase[] = [
     broadAnswer: "เห็นเป็นจุดแดงเล็ก ๆ กับจ้ำตามแขนขามาประมาณ 3 วันค่ะ",
     responseRules: [
       {
+        id: "siblings",
+        domainIds: ["family"],
+        keywords: ["มีพี่น้อง", "พี่น้องไหม", "พี่หรือน้อง", "มีพี่", "มีน้อง", "พี่ชาย", "น้องชาย", "พี่สาว", "น้องสาว", "ลูกกี่คน", "ลูกคนที่"],
+        answer: "มีพี่ชาย 1 คน อายุ 7 ปีค่ะ สุขภาพแข็งแรงดี ไม่มีจ้ำเลือดหรือเลือดออกง่ายเหมือนน้อง",
+      },
+      {
         id: "vaccination",
         domainIds: ["infection"],
         keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "mmr", "เชื้อเป็น", "live vaccine"],
@@ -142,6 +148,12 @@ export const bleedingCases: BleedingCase[] = [
     broadAnswer: "เข่าขวาบวมและปวดหลังล้มตอนเล่นตั้งแต่เมื่อวานค่ะ",
     responseRules: [
       {
+        id: "siblings",
+        domainIds: ["family"],
+        keywords: ["มีพี่น้อง", "พี่น้องไหม", "พี่หรือน้อง", "มีพี่", "มีน้อง", "พี่ชาย", "น้องชาย", "พี่สาว", "น้องสาว", "ลูกกี่คน", "ลูกคนที่"],
+        answer: "มีพี่ชาย 1 คน อายุ 6 ปีค่ะ พี่ชายเคยข้อบวมหลังล้มเบา ๆ และเลือดหยุดช้าหลังแผลเล็ก ๆ คล้ายกันค่ะ ส่วนน้าชายของน้องทางฝ่ายแม่ก็มีข้อบวมและเลือดออกง่ายบ่อยค่ะ",
+      },
+      {
         id: "vaccination",
         domainIds: ["trauma"],
         keywords: ["วัคซีน", "ฉีดวัคซีน", "สมุดวัคซีน", "laje", "เจอี", "เชื้อเป็น", "live vaccine"],
@@ -186,7 +198,7 @@ export const bleedingCases: BleedingCase[] = [
     },
     problemScoring: {
       patternKeywords: ["deep", "เลือดออกลึก", "hemarthrosis", "เลือดออกในข้อ", "ข้อ", "coagulation factor"],
-      positiveKeywords: ["เข่าขวา", "ข้อบวม", "ปวด", "ล้ม", "ฉีดวัคซีน", "น้าชาย", "ฝ่ายแม่"],
+      positiveKeywords: ["เข่าขวา", "ข้อบวม", "ปวด", "ล้ม", "ฉีดวัคซีน", "พี่ชาย", "น้าชาย", "ฝ่ายแม่"],
       negativeKeywords: ["ไม่มีจุดเลือด", "ไม่มี petechiae", "ไม่มีเลือดกำเดา", "ไม่มีไข้", "ตับม้ามไม่โต", "ไม่มีต่อมน้ำเหลือง"],
       differentialKeywords: ["hemophilia", "ฮีโมฟีเลีย", "factor viii", "factor ix", "von willebrand", "septic arthritis", "trauma"],
       impressionKeywords: ["hemophilia a", "ฮีโมฟีเลีย เอ", "factor viii", "แฟกเตอร์ 8"],
@@ -195,7 +207,7 @@ export const bleedingCases: BleedingCase[] = [
       "เด็กชายอายุ 3 ปี มี deep bleeding pattern ได้แก่ hemarthrosis ที่เข่าขวาหลัง trauma เล็กน้อย",
       "มีประวัติเลือดออกหรือช้ำมากกว่าปกติหลังฉีดวัคซีน",
       "ไม่มี petechiae หรือ mucosal bleeding เด่น ทำให้ platelet-type bleeding เด่นชัดน้อยลง",
-      "มีประวัติน้าชายฝ่ายแม่เลือดออกง่าย สนับสนุน X-linked inherited bleeding disorder",
+      "พี่ชายและน้าชายฝ่ายแม่มีข้อบวมและเลือดออกง่าย สนับสนุน X-linked inherited bleeding disorder",
       "ตรวจร่างกายพบข้อเข่าบวม ปวด และขยับได้น้อย",
       "ภาพรวมเข้าได้กับ hemophilia โดยเฉพาะ Hemophilia A",
     ],
@@ -206,8 +218,8 @@ export const bleedingCases: BleedingCase[] = [
   },
   {
     id: "von-willebrand",
-    diagnosis: "von Willebrand disease",
-    diagnosisCategory: "ความผิดปกติของ von Willebrand factor ที่ถ่ายทอดทางพันธุกรรม",
+    diagnosis: "von Willebrand disease type 1",
+    diagnosisCategory: "ความผิดปกติของ von Willebrand factor ที่มักถ่ายทอดแบบ autosomal dominant",
     identity: {
       childName: "เด็กหญิงณิชาภัทร",
       childSurname: "วัฒนานนท์",
@@ -221,6 +233,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกมีเลือดกำเดาออกบ่อย และประจำเดือนมามากค่ะ",
     broadAnswer: "ช่วงนี้เลือดกำเดาออกบ่อยและประจำเดือนก็มามากค่ะ",
     responseRules: [
+      {
+        id: "siblings",
+        domainIds: ["family"],
+        keywords: ["มีพี่น้อง", "พี่น้องไหม", "พี่หรือน้อง", "มีพี่", "มีน้อง", "พี่ชาย", "น้องชาย", "พี่สาว", "น้องสาว", "ลูกกี่คน", "ลูกคนที่"],
+        answer: "มีพี่สาว 1 คน อายุ 16 ปีค่ะ พี่สาวก็มีเลือดกำเดาออกบ่อย ช้ำง่าย และประจำเดือนมามากคล้ายกันค่ะ ส่วนแม่ก็ประจำเดือนมามากและเคยเลือดออกนานหลังทำฟัน",
+      },
       {
         id: "vaccination",
         domainIds: [],
@@ -267,7 +285,7 @@ export const bleedingCases: BleedingCase[] = [
     },
     problemScoring: {
       patternKeywords: ["mucocutaneous", "เยื่อบุ", "ผิวหนัง", "กำเดา", "ประจำเดือน", "platelet-type"],
-      positiveKeywords: ["กำเดา", "ไรฟัน", "ประจำเดือน", "7–8 วัน", "ถอนฟัน", "จ้ำเลือด", "แม่"],
+      positiveKeywords: ["กำเดา", "ไรฟัน", "ประจำเดือน", "7–8 วัน", "ถอนฟัน", "จ้ำเลือด", "พี่สาว", "แม่"],
       negativeKeywords: ["ไม่มีข้อ", "ไม่มีกล้ามเนื้อ", "ไม่มีไข้", "ไม่มีน้ำหนัก", "ตับม้ามไม่โต", "ไม่มีต่อมน้ำเหลือง"],
       differentialKeywords: ["von willebrand", "vwd", "platelet dysfunction", "itp", "hemophilia", "พาหะ"],
       impressionKeywords: ["von willebrand", "vwd", "วอนวิลลิแบรนด์"],
@@ -275,15 +293,15 @@ export const bleedingCases: BleedingCase[] = [
     modelProblemList: [
       "เด็กหญิงอายุ 13 ปี มี mucocutaneous bleeding เรื้อรัง ได้แก่ epistaxis, gum bleeding, easy bruising และ menorrhagia",
       "มีประวัติเลือดออกนานหลังถอนฟัน",
-      "มีประวัติครอบครัว โดยแม่มีประจำเดือนมามากและเลือดออกนานหลังทำฟัน",
+      "มีประวัติครอบครัวในหลายรุ่น โดยพี่สาวมี epistaxis, easy bruising และ menorrhagia ส่วนแม่มีประจำเดือนมามากและเลือดออกนานหลังทำฟัน สนับสนุน autosomal dominant inheritance",
       "ไม่มี joint bleeding หรือ deep muscle bleeding ทำให้ severe hemophilia เด่นชัดน้อยลง",
       "ไม่มีไข้ น้ำหนักลด ต่อมน้ำเหลืองโต หรือตับม้ามโต จึงไม่มี red flags ของ malignancy ชัดเจน",
-      "ภาพรวมเข้าได้กับ von Willebrand disease",
+      "ภาพรวมเข้าได้กับ von Willebrand disease โดยเฉพาะ type 1",
     ],
     differentialDiagnosis: ["von Willebrand disease", "Inherited platelet function disorder", "Immune thrombocytopenia", "Hemophilia carrier with low factor level"],
-    finalImpression: "สงสัย von Willebrand disease",
+    finalImpression: "สงสัย von Willebrand disease type 1",
     suggestedInvestigations: ["CBC พร้อมจำนวนเกล็ดเลือด", "PT", "aPTT", "vWF antigen", "vWF activity หรือ ristocetin cofactor activity", "Factor VIII activity", "Iron studies หากประจำเดือนมากจนสงสัย iron deficiency"],
-    teachingSummary: "von Willebrand disease มักมี mucocutaneous bleeding เช่น epistaxis, gum bleeding, easy bruising และ menorrhagia มักมีประวัติครอบครัว จำนวนเกล็ดเลือดมักปกติ และต้องยืนยันด้วย vWF antigen กับ activity",
+    teachingSummary: "von Willebrand disease มักมี mucocutaneous bleeding เช่น epistaxis, gum bleeding, easy bruising และ menorrhagia มักมีประวัติครอบครัว โดย type 1 ส่วนใหญ่ถ่ายทอดแบบ autosomal dominant จึงอาจพบอาการในพ่อหรือแม่และพี่น้องได้ จำนวนเกล็ดเลือดมักปกติ และต้องยืนยันด้วย vWF antigen กับ activity",
   },
   {
     id: "apde",
@@ -302,6 +320,12 @@ export const bleedingCases: BleedingCase[] = [
     openingStatement: "ลูกมีจ้ำเลือดขึ้นง่ายตามตัวค่ะ",
     broadAnswer: "มีจ้ำตามแขนขาเป็น ๆ หาย ๆ และมีจุดแดงเล็ก ๆ บ้างค่ะ",
     responseRules: [
+      {
+        id: "siblings",
+        domainIds: ["family"],
+        keywords: ["มีพี่น้อง", "พี่น้องไหม", "พี่หรือน้อง", "มีพี่", "มีน้อง", "พี่ชาย", "น้องชาย", "พี่สาว", "น้องสาว", "ลูกกี่คน", "ลูกคนที่"],
+        answer: "มีน้องสาว 1 คน อายุ 4 ปีค่ะ สุขภาพแข็งแรงดี ไม่มีจ้ำเลือดหรือเลือดออกง่ายเหมือนน้อง",
+      },
       {
         id: "vaccination",
         domainIds: [],

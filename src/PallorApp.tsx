@@ -1,11 +1,12 @@
 import { useMemo, useState, type FormEvent } from "react";
-import { ArrowRightLeft, MessageCircle, Stethoscope } from "lucide-react";
+import { ArrowRightLeft, Stethoscope } from "lucide-react";
 import { ChatSimulation } from "./ChatSimulation";
 import { FeedbackScreen, FindingCard } from "./FeedbackScreen";
 import { selectRandomCase } from "./caseBank";
 import { initialCommunicationFlags } from "./communicationScoring";
 import { answerQuestion } from "./responseEngine";
 import { calculateScore } from "./scoringEngine";
+import clinicConsultation from "../assets/clinic-consultation.png";
 import type {
   CommunicationFlags,
   Message,
@@ -176,12 +177,15 @@ function PallorStartScreen({ onStart }: { onStart: () => void }) {
           เริ่มเคส
         </button>
       </div>
-      <div className="illustration-panel" aria-hidden="true">
-        <div className="patient-icon">
-          <MessageCircle size={58} />
+      <div className="illustration-panel pediatric-image-panel">
+        <img
+          src={clinicConsultation}
+          alt="แพทย์กำลังพูดคุยกับมารดาที่อุ้มลูกในคลินิกเด็ก"
+        />
+        <div className="image-caption">
+          <p>ผู้ให้ประวัติ: มารดาของผู้ป่วยเด็ก</p>
+          <span>ระบบจะสุ่ม 1 เคสจาก case bank ที่ซ่อนการวินิจฉัยไว้</span>
         </div>
-        <p>ผู้ให้ประวัติ: มารดาของผู้ป่วยเด็ก</p>
-        <span>ระบบจะสุ่ม 1 เคสจาก case bank ที่ซ่อนการวินิจฉัยไว้</span>
       </div>
     </section>
   );

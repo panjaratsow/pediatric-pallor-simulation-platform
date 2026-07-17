@@ -2,6 +2,10 @@ import { useMemo, useState, type FormEvent } from "react";
 import { ArrowRightLeft, Stethoscope } from "lucide-react";
 import { ChatSimulation } from "./ChatSimulation";
 import { FeedbackScreen, FindingCard } from "./FeedbackScreen";
+import {
+  PallorInvestigationSelection,
+  type PallorInvestigationId,
+} from "./PallorInvestigationSelection";
 import { selectRandomCase } from "./caseBank";
 import { initialCommunicationFlags } from "./communicationScoring";
 import { answerQuestion } from "./responseEngine";
@@ -19,8 +23,9 @@ const stageLabels: { id: Stage; label: string }[] = [
   { id: "start", label: "เริ่มต้น" },
   { id: "history", label: "ซักประวัติ" },
   { id: "exam", label: "ตรวจร่างกาย" },
-  { id: "problem", label: "Problem list" },
-  { id: "feedback", label: "Feedback" },
+  { id: "investigation", label: "ส่งตรวจ" },
+  { id: "problem", label: "สรุปปัญหา" },
+  { id: "feedback", label: "ผลประเมิน" },
 ];
 
 export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => void }) {
@@ -29,6 +34,9 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
   const [messages, setMessages] = useState<Message[]>([]);
   const [question, setQuestion] = useState("");
   const [problemList, setProblemList] = useState("");
+  const [selectedInvestigations, setSelectedInvestigations] = useState<
+    Set<PallorInvestigationId>
+  >(new Set());
   const [trackedDomains, setTrackedDomains] = useState<Set<string>>(new Set());
   const [communicationFlags, setCommunicationFlags] =
     useState<CommunicationFlags>(initialCommunicationFlags);
@@ -43,6 +51,7 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
     setCommunicationFlags(initialCommunicationFlags);
     setQuestion("");
     setProblemList("");
+    setSelectedInvestigations(new Set());
     setScore(null);
     setStage("history");
   }
@@ -79,12 +88,22 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
     setStage("feedback");
   }
 
+  function toggleInvestigation(id: PallorInvestigationId) {
+    setSelectedInvestigations((items) => {
+      const next = new Set(items);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }
+
   const progressTitle = useMemo(() => {
     if (stage === "start") return "ยังไม่ได้เริ่มเคส";
     if (stage === "history") return "กำลังซักประวัติ";
     if (stage === "exam") return "ทบทวนผลตรวจร่างกาย";
-    if (stage === "problem") return "เขียน problem list";
-    return "รับ feedback และเฉลย";
+    if (stage === "investigation") return "กำลังเลือกการส่งตรวจ";
+    if (stage === "problem") return "กำลังสรุปปัญหา";
+    return "รับผลประเมินและทบทวนเฉลย";
   }, [stage]);
 
   return (
@@ -103,9 +122,15 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
         </div>
       </header>
 
-      <nav className="progress" aria-label="ความคืบหน้าเคส">
+      <nav className="progress pallor-progress" aria-label="ความคืบหน้าเคส">
         {stageLabels.map((item, index) => (
-          <div key={item.id} className={`progress-step ${index <= activeIndex ? "active" : ""}`}>
+          <div
+            key={item.id}
+            className={`progress-step ${index <= activeIndex ? "active" : ""} ${
+              index === activeIndex ? "current" : ""
+            }`}
+            aria-current={index === activeIndex ? "step" : undefined}
+          >
             <span>{index + 1}</span>
             <p>{item.label}</p>
           </div>
@@ -139,11 +164,30 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
           question={question}
           setQuestion={setQuestion}
           onSubmit={submitQuestion}
-          onEnd={() => setStage("exam")}
+          onEnd={() => {
+            setStage("exam");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
         />
       )}
       {stage === "exam" && currentCase && (
-        <PallorExamScreen currentCase={currentCase} onContinue={() => setStage("problem")} />
+        <PallorExamScreen
+          currentCase={currentCase}
+          onContinue={() => {
+            setStage("investigation");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
+      )}
+      {stage === "investigation" && (
+        <PallorInvestigationSelection
+          selected={selectedInvestigations}
+          onToggle={toggleInvestigation}
+          onContinue={() => {
+            setStage("problem");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
+        />
       )}
       {stage === "problem" && (
         <PallorProblemScreen
@@ -153,7 +197,12 @@ export function PallorApp({ onSwitchToBleeding }: { onSwitchToBleeding: () => vo
         />
       )}
       {stage === "feedback" && currentCase && score && (
-        <FeedbackScreen currentCase={currentCase} score={score} onRestart={startNewCase} />
+        <FeedbackScreen
+          currentCase={currentCase}
+          score={score}
+          selectedInvestigations={selectedInvestigations}
+          onRestart={startNewCase}
+        />
       )}
     </main>
   );
@@ -204,7 +253,7 @@ function PallorExamScreen({
       <div className="section-head">
         <h2>ผลตรวจร่างกาย</h2>
         <button className="primary-button compact" type="button" onClick={onContinue}>
-          ไปเขียน problem list
+          ไปเลือกการส่งตรวจ
         </button>
       </div>
       <div className="two-column">

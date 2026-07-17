@@ -1,14 +1,27 @@
 import { RefreshCw } from "lucide-react";
+import {
+  pallorInvestigationOptions,
+  type PallorInvestigationId,
+} from "./PallorInvestigationSelection";
 import type { ScoreBreakdown, SimulationCase } from "./types";
 
 type FeedbackScreenProps = {
   currentCase: SimulationCase;
   score: ScoreBreakdown;
+  selectedInvestigations: Set<PallorInvestigationId>;
   onRestart: () => void;
 };
 
-export function FeedbackScreen({ currentCase, score, onRestart }: FeedbackScreenProps) {
+export function FeedbackScreen({
+  currentCase,
+  score,
+  selectedInvestigations,
+  onRestart,
+}: FeedbackScreenProps) {
   const capturedDomains = [...score.generalHits, ...score.caseHits, ...score.problemHits];
+  const selectedInvestigationLabels = pallorInvestigationOptions
+    .filter((option) => selectedInvestigations.has(option.id))
+    .map((option) => option.label);
 
   return (
     <section className="feedback-layout">
@@ -54,7 +67,13 @@ export function FeedbackScreen({ currentCase, score, onRestart }: FeedbackScreen
       </div>
 
       <FeedbackCard title="Model problem list" items={currentCase.modelProblemList} />
-      <FeedbackCard title="Suggested investigations" items={currentCase.suggestedInvestigations} />
+      <div className="two-column">
+        <FeedbackCard
+          title="การส่งตรวจที่เลือก"
+          items={selectedInvestigationLabels.length ? selectedInvestigationLabels : ["ไม่ได้เลือกการส่งตรวจ"]}
+        />
+        <FeedbackCard title="การส่งตรวจที่แนะนำ" items={currentCase.suggestedInvestigations} />
+      </div>
       <article className="teaching-card">
         <h3>Teaching summary</h3>
         <p>{currentCase.teachingSummary}</p>

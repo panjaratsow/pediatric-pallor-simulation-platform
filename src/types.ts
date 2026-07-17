@@ -1,4 +1,10 @@
-export type Stage = "start" | "history" | "exam" | "problem" | "feedback";
+export type Stage =
+  | "start"
+  | "history"
+  | "exam"
+  | "investigation"
+  | "problem"
+  | "feedback";
 
 export type Message = {
   id: string;
